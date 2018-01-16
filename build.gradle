@@ -1,0 +1,38 @@
+plugins {
+  id 'com.github.kt3k.coveralls' version '2.6.3'
+}
+
+apply plugin: 'java'
+apply plugin: 'jacoco'
+apply plugin: 'com.github.kt3k.coveralls'
+apply plugin: 'antlr'
+
+// In this section you declare where to find the dependencies of your project
+repositories {
+    jcenter()
+    mavenCentral()
+}
+
+dependencies {
+    // Use JUnit test framework
+    testImplementation 'junit:junit:4.12'
+	compile 'com.google.code.gson:gson:2.2.4'
+	antlr "org.antlr:antlr4:4.7"
+	compile "org.antlr:antlr4-runtime:4.7"
+	
+}
+
+test.testLogging {
+    exceptionFormat = "full";
+    events "failed", "passed", "skipped", "standardOut", "standardError"
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled = true
+        csv.enabled = false
+        html.enabled = true
+        // html.destination "${buildDir}/reports/coverage"
+        // xml.destination "${buildDir}/reports/coverage"
+    }
+}
